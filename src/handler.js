@@ -43,15 +43,20 @@ const addNoteHandler = (request, h) => {
   return response
 }
 
-const getAllNotesHandler = () => ({
-  status: 'success',
-  data: {
-    notes,
-  },
-})
+const getAllNotesHandler = (request, h) => {
+  const response = h.response({
+    status: 'success',
+    data: {
+      notes,
+    },
+  })
+  response.code(200)
+  return response
+}
 
 const getNoteByIdHandler = (request, h) => {
   const { id } = request.params
+  const {name, reading, finished} = request.query
 
   const note = notes.filter((n) => n.id === id)[0]
 
